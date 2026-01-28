@@ -1,12 +1,20 @@
-import styles from './App.module.css';
+import styled from 'styled-components';
+
+const Div = styled.div`
+	text-align: center;
+`;
 
 export const App = () => {
 	return (
 		<>
-			<div className={styles.App}>Hello Blog</div>
-			<div>
-				<p>`So... Let`s get started`</p>
-			</div>
+			<Div>
+				<div>Hello Blog</div>
+				<div>
+					<i className="fa fa-rss-square"></i>
+					<div>123</div>
+					<p>`So... Let`s get started`</p>
+				</div>
+			</Div>
 		</>
 	);
 };
