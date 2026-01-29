@@ -1,24 +1,28 @@
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { Header } from './components';
 
 const AppColumn = styled.div`
-	display: flex,
-	flex-direction: column,
-	justify-content: space-between,
-	width: 1000px,
-	min-height: 100%,
-	margin: 0 auto,
+	display: flex;
+	flex-direction: column;
+
+	width: 1000px;
+	min-height: 100vh;
+	margin: 0 auto;
 	background-color: #fff;
 `;
 const Content = styled.div`
+	flex: 1;
 	padding: 120px 0;
+	justify-content: center;
+
+	align-items: center:
 `;
 
 const H2 = styled.h2`
-	text-alighn: center;
+	text-align: center;
 `;
 
-const Header = () => <div>Шапка</div>;
 const Footer = () => <div>Футер</div>;
 
 export const Blog = () => {
@@ -26,7 +30,7 @@ export const Blog = () => {
 		<AppColumn>
 			<Header />
 			<Content>
-				<h2>Контент страницы</h2>
+				<H2>Контент страницы</H2>
 				<Routes>
 					<Route path="/" element={<div>Главная страница</div>} />
 					<Route path="/register" element={<div>Регистрация</div>} />
