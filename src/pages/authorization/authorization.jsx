@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form';
+import { useDispatch, useStore, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { server } from '../../bff';
-import { Button, Input } from '../../components';
-import { useState } from 'react';
+import { Button, Input, H2 } from '../../components';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { setUser } from '../../action';
+import { selectUserRole } from '../../selectors';
+import { ROLE } from '../../constants';
 
 const authFormSchema = yup.object().shape({
 	login: yup
@@ -44,6 +48,7 @@ const AuthorizationContainer = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -53,28 +58,62 @@ const AuthorizationContainer = ({ className }) => {
 		resolver: yupResolver(authFormSchema),
 	});
 
-	const [serverError, setServerError] = useState('');
+	const [serverError, setServerError] = useState(null);
+
+	const dispatch = useDispatch();
+
+	const store = useStore();
+
+	const roleId = useSelector(selectUserRole);
+
+	useEffect(() => {
+		let currentWasLogout = store.getState().app.wasLogout;
+
+		return store.subscribe(() => {
+			let previosWasLogut = currentWasLogout;
+			currentWasLogout = store.getState().app.wasLogout;
+
+			if (currentWasLogout !== previosWasLogut) {
+				reset();
+			}
+		});
+	}, [reset, store]);
 
 	const onSubmit = ({ login, password }) => {
 		server.authorize(login, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(`Ошибка запроса: ${error}`);
+				return;
 			}
+
+			dispatch(setUser(res));
 		});
 	};
 
 	const formError = errors?.login?.message || errors?.password?.message;
 	const errorMessage = formError || serverError;
 
+	if (roleId !== ROLE.GUEST) {
+		return <Navigate to="/" />;
+	}
+
 	return (
 		<div className={className}>
-			<h2>Авторизация</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<Input type="text" placeholder="Логин..." {...register('login')}></Input>
+				<H2>Авторизация</H2>
+				<Input
+					type="text"
+					placeholder="Логин..."
+					{...register('login', {
+						onChange: () => setServerError(null),
+					})}
+				></Input>
 				<Input
 					type="password"
 					placeholder="Пароль..."
-					{...register('password')}
+					{...register('password', {
+						onChange: () => setServerError(null),
+					})}
 				></Input>
 				<Button type="submit" disabled={!!formError}>
 					Авторизоваться
