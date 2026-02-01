@@ -4,21 +4,28 @@
       "id": "001",
       "login": "Grisha",
       "password": "1237124899128",
-      "registred_at": "2050-11-15",
+      "registered_at": "2050-11-15",
       "role_id": 0
     },
     {
       "id": "4262",
       "login": "Ivan",
       "password": "qwerty123",
-      "registerAt": "1970-01-27 11:20",
+      "registered_at": "1970-01-27 11:20",
       "role_id": 2
     },
     {
       "id": "0dd6",
       "login": "Misha",
       "password": "123qwerty",
-      "registerAt": "1970-02-02 02:27",
+      "registered_at": "1970-02-02 02:27",
+      "role_id": 2
+    },
+    {
+      "id": "feab",
+      "login": "Msha2",
+      "password": "123123",
+      "registered_at": "1970-01-27 18:06",
       "role_id": 2
     }
   ],
