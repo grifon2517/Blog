@@ -5,11 +5,14 @@ import { useServerRequest } from '../../hooks';
 import { useEffect, useState } from 'react';
 import { Content } from '../../components';
 import styled from 'styled-components';
+import { ROLE } from '../../constants';
 
 const UsersContainer = ({ className }) => {
 	const [roles, setRoles] = useState([]);
 	const [users, setUsers] = useState([]);
 	const [errorMessage, setErrorMessage] = useState();
+	const [shouldUpdateUserList, setShouldUpdateUserList] = useState(false);
+
 	const requestServer = useServerRequest();
 
 	useEffect(() => {
@@ -19,12 +22,18 @@ const UsersContainer = ({ className }) => {
 					setErrorMessage(usersRes.error || rolesRes.error);
 					return;
 				}
-				console.log(usersRes, rolesRes);
+
 				setUsers(usersRes.res);
 				setRoles(rolesRes.res);
 			},
 		);
-	}, [requestServer]);
+	}, [requestServer, shouldUpdateUserList]);
+
+	const onUserRemove = (userId) => {
+		requestServer('removeUser', userId).then(() => {
+			setShouldUpdateUserList(!shouldUpdateUserList);
+		});
+	};
 
 	return (
 		<div className={className}>
@@ -41,10 +50,12 @@ const UsersContainer = ({ className }) => {
 					{users.map(({ id, login, registeredAt, roleId }) => (
 						<UserRow
 							key={id}
+							id={id}
 							login={login}
 							registeredAt={registeredAt}
 							roleId={roleId}
-							roles={roles}
+							roles={roles.filter(({ id: roleId }) => roleId !== ROLE.GUEST)}
+							onUserRemove={() => onUserRemove(id)}
 						/>
 					))}
 				</>
@@ -59,4 +70,5 @@ export const Users = styled(UsersContainer)`
 	align-items: center;
 	flex-direction: column;
 	width: 570px;
+	font-size: 18px;
 `;

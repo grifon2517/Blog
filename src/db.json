@@ -13,37 +13,23 @@
       "password": "qwerty123",
       "registered_at": "1970-01-27 11:20",
       "role_id": 2
-    },
-    {
-      "id": "0dd6",
-      "login": "Misha",
-      "password": "123qwerty",
-      "registered_at": "1970-02-02 02:27",
-      "role_id": 2
-    },
-    {
-      "id": "feab",
-      "login": "Msha2",
-      "password": "123123",
-      "registered_at": "1970-01-27 18:06",
-      "role_id": 2
     }
   ],
   "roles": [
     {
-      "id": "0",
+      "id": 0,
       "name": "administrator"
     },
     {
-      "id": "1",
+      "id": 1,
       "name": "Модератор"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Читатель"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Гость"
     }
   ],

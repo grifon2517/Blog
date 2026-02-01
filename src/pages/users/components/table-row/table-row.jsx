@@ -7,9 +7,12 @@ const TableRowContainer = ({ className, children }) => (
 export const TableRow = styled(TableRowContainer)`
 	display: flex;
 	align-items: center;
+	${({ border }) => (border ? 'border: 1px solid #000' : '')};
 
-	& > {
-		padding: 0 10px;
+	&  > .div {
+	display: flex
+		padding:  0 102px;
+
 	}
 
 	& .login-column {
