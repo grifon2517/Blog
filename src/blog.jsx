@@ -1,7 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
 import { Header, Footer } from './components';
+import { useDispatch } from 'react-redux';
 import { Authorization, Registration, Users, Post } from './pages';
+import { useLayoutEffect } from 'react';
+import { setUser } from './action';
+import styled from 'styled-components';
 
 const AppColumn = styled.div`
 	display: flex;
@@ -14,7 +17,7 @@ const AppColumn = styled.div`
 `;
 const Page = styled.div`
 	flex: 1;
-	padding: 120px 0;
+	padding: 120px 0 20px;
 	justify-content: center;
 
 	align-items: center:
@@ -25,6 +28,25 @@ const H2 = styled.h2`
 `;
 
 export const Blog = () => {
+	const dispatch = useDispatch();
+
+	useLayoutEffect(() => {
+		const currentUserDataJSON = sessionStorage.getItem('userData');
+
+		if (!currentUserDataJSON) {
+			return;
+		}
+
+		const currentUserData = JSON.parse(currentUserDataJSON);
+
+		dispatch(
+			setUser({
+				...currentUserData,
+				roleId: Number(currentUserData.roleId),
+			}),
+		);
+	}, [dispatch]);
+
 	return (
 		<AppColumn>
 			<Header />

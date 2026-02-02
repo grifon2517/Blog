@@ -22,10 +22,7 @@ const authFormSchema = yup.object().shape({
 	password: yup
 		.string()
 		.required('Заполните пароль')
-		.matches(
-			/^[\w#%]+$/,
-			'Неверно заполнен пароль. Допускаются буквы, цифры и знаки: № %',
-		)
+		.matches(/^[\w#%]+$/, 'Неверно заполнен пароль. Допускаются буквы, цифры и знаки: № %')
 
 		.min(6, 'Неверно заполнен пароль. Минимум 6 символа')
 		.max(20, 'Неверно заполнен пароль. Максиумум 20 символов'),
@@ -68,6 +65,7 @@ const AuthorizationContainer = ({ className }) => {
 			}
 
 			dispatch(setUser(res));
+			sessionStorage.setItem('userData', JSON.stringify(res));
 		});
 	};
 

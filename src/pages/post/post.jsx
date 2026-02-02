@@ -12,7 +12,7 @@ const PostContainer = ({ className }) => {
 	const params = useParams();
 	const requestServer = useServerRequest();
 	const post = useSelector(selectPost);
-	console.log(post);
+
 	useEffect(() => {
 		dispatch(loadPostAsync(requestServer, params.id));
 	}, [dispatch, requestServer, params.id]);
@@ -20,11 +20,15 @@ const PostContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<>
+				<div>{post.title}</div>
 				<PostContent post={post} />
-				<Comments comments={post.comments} />
+				<Comments comments={post.comments} postId={post.id} />
 			</>
 		</div>
 	);
 };
 
-export const Post = styled(PostContainer)``;
+export const Post = styled(PostContainer)`
+	padding: 0 80px;
+	margin: 40px 0;
+`;
