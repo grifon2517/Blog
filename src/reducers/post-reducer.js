@@ -10,6 +10,7 @@ const initialPostState = {
 };
 
 export const postReducer = (state = initialPostState, action) => {
+	console.log(state, action);
 	switch (action.type) {
 		case ACTION_TYPE.SET_POST_DATA:
 			return {

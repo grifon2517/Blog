@@ -1,1 +1,4 @@
-export const selectPost = ({ post }) => post;
+export const selectPost = ({ post }) => {
+	console.log(post);
+	return post;
+};
