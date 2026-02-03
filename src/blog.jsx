@@ -5,6 +5,7 @@ import { Authorization, Registration, Users, Post } from './pages';
 import { useLayoutEffect } from 'react';
 import { setUser } from './action';
 import styled from 'styled-components';
+import { Modal } from './components/modal/modal';
 
 const AppColumn = styled.div`
 	display: flex;
@@ -63,6 +64,7 @@ export const Blog = () => {
 				</Routes>
 			</Page>
 			<Footer />
+			<Modal />
 		</AppColumn>
 	);
 };

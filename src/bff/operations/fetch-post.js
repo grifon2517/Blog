@@ -12,7 +12,7 @@ export const fetchPost = async (postId) => {
 
 		return {
 			...comment,
-			author: user?.login,
+			author: user.login,
 		};
 	});
 
