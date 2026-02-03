@@ -14,7 +14,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 	const requestServer = useServerRequest();
 
 	const onNewCommentAdd = (userId, postId, content) => {
-		dispatch(addCommentAsync(requestServer, postId, userId, content));
+		dispatch(addCommentAsync(requestServer, userId, postId, content));
 		setNewComment('');
 	};
 
@@ -30,13 +30,14 @@ const CommentsContainer = ({ className, comments, postId }) => {
 				<Icon
 					id="fa-paper-plane-o"
 					margin="80px 0 0 10px"
-					onClick={() => onNewCommentAdd(postId, userId, newComment)}
+					onClick={() => onNewCommentAdd(userId, postId, newComment)}
 				/>
 			</div>
 			<div className="comments">
 				{comments.map(({ id, author, content, publishedAt }) => (
 					<Comment
 						key={id}
+						postId={postId}
 						id={id}
 						author={author}
 						content={content}

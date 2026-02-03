@@ -17,19 +17,19 @@
   ],
   "roles": [
     {
-      "id": 0,
+      "id": "0",
       "name": "administrator"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Модератор"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Читатель"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Гость"
     }
   ],
@@ -79,18 +79,25 @@
       "content": "вцфв"
     },
     {
-      "id": "84b4",
+      "id": "1773",
       "author_id": "001",
       "post_id": "001",
-      "published_at": "1970-01-27 15:17",
-      "content": "ghhfg"
+      "published_at": "1970-01-27 03:34",
+      "content": "вфцвфц"
     },
     {
-      "id": "5c87",
+      "id": "f034",
       "author_id": "001",
       "post_id": "001",
-      "published_at": "1970-01-27 00:13",
-      "content": "dawdaw"
+      "published_at": "1970-02-03 22:43",
+      "content": "вфцв"
+    },
+    {
+      "id": "375a",
+      "author_id": "001",
+      "post_id": "001",
+      "published_at": "1970-01-24 05:56",
+      "content": "ds"
     }
   ],
   "sessions": [
@@ -130,6 +137,17 @@
     {
       "id": "a0f4",
       "hash": "0.32817951924865251811525013181380927562713623046875",
+      "user": {
+        "id": "001",
+        "login": "Grisha",
+        "password": "1237124899128",
+        "registeredAt": "2050-11-15",
+        "roleId": 0
+      }
+    },
+    {
+      "id": "d013",
+      "hash": "0.49976011306587053706351753135095350444316864013672",
       "user": {
         "id": "001",
         "login": "Grisha",
