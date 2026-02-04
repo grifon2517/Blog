@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useServerRequest } from '../../../../hooks';
@@ -9,37 +9,44 @@ import { Input, Icon } from '../../../../components';
 import styled from 'styled-components';
 
 const PostFormContainer = ({ className, post: { id, title, imageUrl, content, publishedAt } }) => {
-	const imageRef = useRef(null);
-	const titleRef = useRef(null);
+	const [imageUrlValue, setImageUrlValue] = useState(imageUrl);
+	const [titleValue, setTitlelValue] = useState(title);
 	const contentRef = useRef(null);
+
+	useLayoutEffect(() => {
+		setImageUrlValue(imageUrl);
+		setTitlelValue(title);
+	}, [imageUrl, title]);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const requestServer = useServerRequest();
 
 	const onSave = () => {
-		const newImageUrl = sanitizeContent(imageRef.current.value);
-		const newTitle = sanitizeContent(titleRef.current.value);
 		const newContent = sanitizeContent(contentRef.current.innerHTML);
 
 		dispatch(
 			savePostAsync(requestServer, {
 				id,
-				imageUrl: newImageUrl,
-				title: newTitle,
+				imageUrl: imageUrlValue,
+				title: titleValue,
 				content: newContent,
 			}),
-		).then(() => navigate(`/posts/${id}`));
+		).then(({ id }) => navigate(`/posts/${id}`));
 	};
+
+	const onImageChange = ({ target }) => setImageUrlValue(target.value);
+	const onTitleChange = ({ target }) => setTitlelValue(target.value);
 
 	return (
 		<div className={className}>
-			<Input ref={imageRef} defaultValue={imageUrl} placeholder="Изображение..." />
-			<Input ref={titleRef} defaultValue={title} placeholder="Заголовок..." />
+			<Input value={imageUrlValue} placeholder="Изображение..." onChange={onImageChange} />
+			<Input value={titleValue} placeholder="Заголовок..." onChange={onTitleChange} />
 			<SpecialPanel
+				id={id}
 				publishedAt={publishedAt}
 				margin="20px 0 "
-				editButton={<Icon id="fa-floppy-o" margin="0 10px 0 0" onClick={onSave} />}
+				editButton={<Icon id="fa-floppy-o" margin="0 " onClick={onSave} />}
 			/>
 			<div
 				ref={contentRef}
@@ -60,6 +67,8 @@ export const PostForm = styled(PostFormContainer)`
 	}
 
 	& .post-text {
+		border: 1px solid #000;
+		min-height: 80px;
 		font-size: 18px;
 		white-space: break-spaces;
 	}
