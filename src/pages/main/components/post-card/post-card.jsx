@@ -11,11 +11,21 @@ const PostCardContainer = ({ className, id, title, imageUrl, publishedAt, commen
 					<h4>{title}</h4>
 					<div className="post-card-info">
 						<div className="published-at">
-							<Icon inactive={true} id="fa-calendar-o" margin="0 10px 0 0" />
+							<Icon
+								inactive={true}
+								id="fa-calendar-o"
+								margin="0 7px 0 0"
+								size="18px"
+							/>
 							{publishedAt}
 						</div>
 						<div className="comments-count">
-							<Icon inactive={true} id="fa-comment-o" margin="0 10px 0 0" />
+							<Icon
+								inactive={true}
+								id="fa-comment-o"
+								margin="0 7px 0 0"
+								size="18px"
+							/>
 							{commentsCount}
 						</div>
 					</div>

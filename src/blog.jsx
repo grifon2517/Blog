@@ -10,7 +10,8 @@ import { Modal } from './components/modal/modal';
 const AppColumn = styled.div`
 	display: flex;
 	flex-direction: column;
-
+	justify-content: space-between;
+	position: relative;
 	width: 1000px;
 	min-height: 100vh;
 	margin: 0 auto;
@@ -52,7 +53,7 @@ export const Blog = () => {
 		<AppColumn>
 			<Header />
 			<Page>
-				<H2>Контент страницы</H2>
+				<H2></H2>
 				<Routes>
 					<Route path="/" element={<Main />} />
 					<Route path="/register" element={<Registration />} />
