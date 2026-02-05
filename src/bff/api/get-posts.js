@@ -1,6 +1,9 @@
 import { transformPost } from '../transformers';
 
-export const getPosts = () =>
-	fetch(`http://localhost:3000/posts`)
-		.then((loadedPosts) => loadedPosts.json())
-		.then((loadedPosts) => loadedPosts && loadedPosts.map(transformPost));
+export const getPosts = (page, limit) =>
+	fetch(`http://localhost:3000/posts?_page=${page}&_limit=${limit}`)
+		.then((loadedPosts) => Promise.all([loadedPosts.json(), loadedPosts.headers.get('Link')]))
+		.then(([loadedPosts, links]) => ({
+			posts: loadedPosts && loadedPosts.map(transformPost),
+			links,
+		}));

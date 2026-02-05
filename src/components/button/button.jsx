@@ -19,6 +19,14 @@ export const Button = styled(ButtonContainer)`
 	background-color: #b1aeae;
 
 	&:hover {
-		cursor: pointer;
+		cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	}
+
+	/* --- ЯВНЫЕ СТИЛИ ДЛЯ НЕАКТИВНОГО СОСТОЯНИЯ --- */
+    &:disabled {
+        /* 1. Задаем "неактивные" цвета */
+        color: #a9a9a9;             /* Светло-серый текст */
+        background-color: #e9e9e9;  /* Серый фон */
+        border-color: #d3d3d3;      /* Серая рамка (чтобы кнопка не "урезалась") */
+
 `;
