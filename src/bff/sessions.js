@@ -20,7 +20,7 @@ export const sessions = {
 	},
 	async access(hash, accessRoles) {
 		const dbSession = await getSession(hash);
-		console.log(hash, dbSession);
-		return !!dbSession.user && accessRoles.includes(dbSession.user.roleId);
+
+		return !!dbSession?.user && accessRoles.includes(dbSession.user.roleId);
 	},
 };

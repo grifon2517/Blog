@@ -13,6 +13,13 @@
       "password": "qwerty123",
       "registered_at": "1970-01-27 11:20",
       "role_id": 2
+    },
+    {
+      "id": "003",
+      "login": "Misha",
+      "password": "qwe123",
+      "registered_at": "1970-01-27 11:20",
+      "role_id": 1
     }
   ],
   "roles": [
@@ -150,6 +157,39 @@
         "roleId": 0
       },
       "id": "waBdhBY"
+    },
+    {
+      "hash": "0.84229930838695821204709091034601442515850067138672",
+      "user": {
+        "id": "003",
+        "login": "Misha",
+        "password": "qwe123",
+        "registeredAt": "1970-01-27 11:20",
+        "roleId": 2
+      },
+      "id": "KDAmNDh"
+    },
+    {
+      "hash": "0.31966603886424227454199353815056383609771728515625",
+      "user": {
+        "id": "003",
+        "login": "Misha",
+        "password": "qwe123",
+        "registeredAt": "1970-01-27 11:20",
+        "roleId": 1
+      },
+      "id": "0QJcp5m"
+    },
+    {
+      "hash": "0.74149698948210163162997332619852386415004730224609",
+      "user": {
+        "id": "001",
+        "login": "Grisha",
+        "password": "1237124899128",
+        "registeredAt": "2050-11-15",
+        "roleId": 0
+      },
+      "id": "GU1ieQI"
     }
   ]
 }

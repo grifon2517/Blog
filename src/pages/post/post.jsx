@@ -5,16 +5,17 @@ import { useServerRequest } from '../../hooks';
 import { RESET_POST_DATA, loadPostAsync } from '../../action';
 import { PostContent, Comments, PostForm } from './components';
 import { selectPost } from '../../selectors';
-import { Error } from '../../components';
+import { Error, PrivateContent } from '../../components';
 import styled from 'styled-components';
+import { ROLE } from '../../constants';
 
 const PostContainer = ({ className }) => {
-	const [error, setError] = useState(true);
+	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
 	const params = useParams();
 	const [isLoading, setIsloading] = useState(true);
-	const isEditing = useMatch('/posts/:id/edit');
-	const isCreating = useMatch('/post');
+	const isEditing = !!useMatch('/posts/:id/edit');
+	const isCreating = !!useMatch('/post');
 	const requestServer = useServerRequest();
 	const post = useSelector(selectPost);
 
@@ -38,22 +39,21 @@ const PostContainer = ({ className }) => {
 		return null;
 	}
 
-	return error ? (
-		<Error error={error} />
-	) : (
-		<div className={className}>
-			<>
-				{isCreating || isEditing ? (
+	const SpecificPostPage =
+		isCreating || isEditing ? (
+			<PrivateContent access={[ROLE.ADMIN]} serverError={error}>
+				<div className={className}>
 					<PostForm post={post} />
-				) : (
-					<>
-						<PostContent post={post} />
-						<Comments comments={post.comments} postId={post.id} />
-					</>
-				)}
-			</>
-		</div>
-	);
+				</div>
+			</PrivateContent>
+		) : (
+			<div className={className}>
+				<PostContent post={post} />
+				<Comments comments={post.comments} postId={post.id} />
+			</div>
+		);
+
+	return error ? <Error error={error} /> : SpecificPostPage;
 };
 
 export const Post = styled(PostContainer)`
