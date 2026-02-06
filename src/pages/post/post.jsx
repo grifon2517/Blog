@@ -7,7 +7,6 @@ import { PostContent, Comments, PostForm } from './components';
 import { selectPost } from '../../selectors';
 import { Error, PrivateContent } from '../../components';
 import styled from 'styled-components';
-import { ROLE } from '../../constants';
 
 const PostContainer = ({ className }) => {
 	const [error, setError] = useState(null);
