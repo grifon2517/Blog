@@ -1,16 +1,30 @@
-# React + Vite
+Области хранения данных:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- база данных на json-server
+- BFF
+- редакс стор - для состояния
 
-Currently, two official plugins are available:
+Сущности приложения:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- пользователь: БД (список пользователей), BFF (сессия текущего), стор(отображение в браузере)
+- роль пользователя: БД (список ролей), BFF (сессия пользователя с ролью), стор (использование на клиенте)
+- статья: БД(список статей), стор(отображение в браузере)
+- комментарий: БД (список комментариев), стор (отображение в браузере)
 
-## React Compiler
+Таблицы БД:
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- пользователи - users: id / login / password / registred_at / role_id
+- роли - roles: id / name
+- статьи - posts: id / title / image_url / content / published_at
+- комментарии - comments: id / author_id / post_id / content / published_at
 
-## Expanding the ESLint configuration
+Схема состояния на BFF:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- сессия текущего пользователя: login /password / role
+
+Схема для редакс стора (на клиенте):
+
+- user: id / login / role_id
+- posts: массив post: id / title / imageUrl / publishedAt / commentsCount
+- post: id / title / imageUrl / content / publishedAt / comments массив: comment: id / author / content/ publishedAt
+- users: массив user: id / login / registredAt / role
