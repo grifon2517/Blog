@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ButtonContainer = ({ children, className, ...props }) => {
+const ButtonContainer = ({ children, className, width, ...props }) => {
 	return (
 		<button className={className} {...props}>
 			{children}
@@ -30,3 +31,8 @@ export const Button = styled(ButtonContainer)`
         border-color: #d3d3d3;      /* Серая рамка (чтобы кнопка не "урезалась") */
 
 `;
+
+Button.propTypes = {
+	children: PropTypes.node.isRequired,
+	width: PropTypes.string,
+};

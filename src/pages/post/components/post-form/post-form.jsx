@@ -7,6 +7,7 @@ import { savePostAsync } from '../../../../action';
 import { SpecialPanel } from '../special-panel/special-panel';
 import { Input, Icon } from '../../../../components';
 import styled from 'styled-components';
+import { PROP_TYPE } from '../../../../bff/constants';
 
 const PostFormContainer = ({ className, post: { id, title, imageUrl, content, publishedAt } }) => {
 	const [imageUrlValue, setImageUrlValue] = useState(imageUrl);
@@ -73,3 +74,7 @@ export const PostForm = styled(PostFormContainer)`
 		white-space: break-spaces;
 	}
 `;
+
+PostForm.propTypes = {
+	post: PROP_TYPE.POST.isRequired,
+};
